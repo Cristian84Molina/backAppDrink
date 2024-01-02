@@ -1,5 +1,8 @@
 require("dotenv").config();
-const { Sequelize, Model } = require("sequelize");
+require("pg");
+const { Sequelize } = require("sequelize");
+const fs = require("fs");
+const path = require("path");
 const { DB_DEPLOY } = process.env;
 
 //cargamos los modelos
@@ -22,10 +25,9 @@ const transaccionesModels = require("./models/Transacciones");
     { logging: false, native: false }
   ); */
 
-  const sequelize = new Sequelize(process.env.DB_DEPLOY, {
+  const sequelize = new Sequelize(DB_DEPLOY, {
     logging: false,
     native: false,
-    dialect: 'postgres',
     dialectOptions: {
       ssl: {
         require: true,
