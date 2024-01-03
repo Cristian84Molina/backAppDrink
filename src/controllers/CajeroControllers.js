@@ -28,5 +28,13 @@ const getCajeroByName = async (name) => {
     return cajero;
 
 }
+const deleteCajeroById = async (id) => {
+    const deletedRows = await cajeros.destroy({
+      where: {
+        id: id
+      }
+    });
+    return deletedRows > 0; // Retorna true si se eliminó al menos un registro, false si no se eliminó nada.
+  };
 
-module.exports = { createCajeros, getAllcajeros, getCajeroById, getCajeroByName };
+module.exports = { createCajeros, getAllcajeros, getCajeroById, getCajeroByName, deleteCajeroById };

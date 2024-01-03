@@ -1,8 +1,24 @@
 const { Router } = require('express');
-const { createCajeros, getAllcajeros, getCajeroById, getCajeroByName } = require("../controllers/CajeroControllers");
+const { createCajeros, getAllcajeros, getCajeroById, getCajeroByName, deleteCajeroById } = require("../controllers/CajeroControllers");
 const server =  Router();
 const bcrypt = require('bcrypt');
 
+// Ruta para eliminar un cajero por ID
+server.delete('/:id', async (req, res) => {
+    const { id } = req.params;
+
+    try {
+        const deleted = await deleteCajeroById(id);
+
+        if (deleted) {
+            res.status(200).json({ message: 'Cajero eliminado correctamente' });
+        } else {
+            res.status(404).json({ message: 'Cajero no encontrado' });
+        }
+    } catch (error) {
+        res.status(500).json({ message: error.message });
+    }
+});
 
 server.post('/', async(req, res) => { 
     const datos = req.body;
