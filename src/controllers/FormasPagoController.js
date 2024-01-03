@@ -3,14 +3,11 @@ const {formaspago} = require('../dbConex');
 const createFormaspago = async (datos) => {
     const {
     name,
-    active,
-    maneja_ctabanco} = datos;
-    if (!name ||!active ||!maneja_ctabanco) { throw new Error('Datos faltantes') }
-    const newFormaspago = await formaspago.create({
-        name,
-        active,
-        maneja_ctabanco
-    });
+    active} = datos;
+    if (!name ||!active) { throw new Error('Datos faltantes') }
+    const newFormaspago = await formaspago.create(
+        datos
+    );
     return newFormaspago;
 };
 
