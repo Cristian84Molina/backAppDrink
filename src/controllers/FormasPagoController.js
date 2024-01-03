@@ -7,7 +7,6 @@ const createFormaspago = async (datos) => {
     maneja_ctabanco} = datos;
     if (!name ||!active ||!maneja_ctabanco) { throw new Error('Datos faltantes') }
     const newFormaspago = await formaspago.create({
-        id,
         name,
         active,
         maneja_ctabanco
